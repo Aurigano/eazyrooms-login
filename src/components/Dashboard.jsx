@@ -135,6 +135,7 @@ const DashboardContainer = styled.div`
 `;
 
 function Dashboard({ page }) {
+	console.log("here1");
 	const navigate = useNavigate();
 	const userDataRecieved = localStorage.getItem("eazy-room-user");
 	const userData = JSON.parse(userDataRecieved);
@@ -158,7 +159,9 @@ function Dashboard({ page }) {
 
 	// if no user logged in
 	useEffect(() => {
+		console.log("here2");
 		if (!localStorage.getItem("eazy-room-user")) {
+			console.log("here3");
 			navigate("/login");
 		}
 	}, []);

@@ -100,14 +100,23 @@ export default function Signup() {
 	const navigate = useNavigate();
 	const [values, setValues] = useState({
 		firstname: "",
-		lastname: "",
+		lastname: "Singhania",
+		city: "Hyderabad",
+		zip: "123456",
 		email: "",
 		password: "",
 		confirmPassword: "",
 		phone: "",
-		city: "",
 		consent: false,
 	});
+	// setValues((prev) => {
+	// 	return {
+	// 		...prev,
+	// 		lastname: "Singhania",
+	// 		city: "Hyderabad",
+	// 		zip: "123456",
+	// 	};
+	// });
 	const [error, setError] = useState(true);
 
 	const handleChange = (event) => {
@@ -177,6 +186,7 @@ export default function Signup() {
 		event.preventDefault();
 		handleValidation();
 		if (handleValidation()) {
+			console.log(values);
 			const { firstname, lastname, city, phone, email, password, zip } =
 				values;
 			const payloadBody = {
@@ -188,14 +198,15 @@ export default function Signup() {
 				user_city: city,
 				user_zipcode: zip,
 			};
+			console.log(payloadBody);
 			const userRegistrationEndPoint =
 				"https://snapkaro.com/eazyrooms_staging/api/user_registeration";
 
 			try {
-				const { data } = await axios.post(
-					userRegistrationEndPoint,
-					payloadBody
-				);
+				// const { data } = await axios.post(
+				// 	userRegistrationEndPoint,
+				// 	payloadBody
+				// );
 
 				if (data.status) {
 					// if success, redirect to dashboard
@@ -212,7 +223,6 @@ export default function Signup() {
 
 	return (
 		<FormContainer>
-			{/* <div>Login</div> */}
 			<div className="form-wrapper" onSubmit={(e) => handleSubmit(e)}>
 				<form className="header">
 					<img src={Logo} alt="logo" />
@@ -233,14 +243,14 @@ export default function Signup() {
 								onChange={(e) => handleChange(e)}
 							/>
 						</div>
-						<div className="input-set">
+						{/* <div className="input-set">
 							<p className="label-text">Last name *</p>
 							<input
 								type="text"
 								name="lastname"
 								onChange={(e) => handleChange(e)}
 							/>
-						</div>
+						</div> */}
 						<div className="input-set">
 							<p className="label-text">Email address *</p>
 							<input
@@ -273,7 +283,7 @@ export default function Signup() {
 								onChange={(e) => handleChange(e)}
 							/>
 						</div>
-						<div className="input-set">
+						{/* <div className="input-set">
 							<p className="label-text">City *</p>
 							<input
 								type="text"
@@ -288,7 +298,7 @@ export default function Signup() {
 								name="zip"
 								onChange={(e) => handleChange(e)}
 							/>
-						</div>
+						</div> */}
 					</div>
 					<div className="consent">
 						<input
@@ -299,7 +309,6 @@ export default function Signup() {
 								setValues((prev) => {
 									return { ...prev, consent: !prev.consent };
 								});
-								set;
 							}}
 						/>
 						<div className="checkmark">
