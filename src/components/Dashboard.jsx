@@ -104,7 +104,7 @@ const DashboardContainer = styled.div`
 		background-color: #696969;
 		color: white;
 		text-align: center;
-		padding: 10px;
+		padding: 10px 20px;
 		display: flex;
 		justify-content: space-between;
 	}
@@ -135,11 +135,9 @@ const DashboardContainer = styled.div`
 `;
 
 function Dashboard({ page }) {
-	console.log(page);
 	const navigate = useNavigate();
 	const userDataRecieved = localStorage.getItem("eazy-room-user");
 	const userData = JSON.parse(userDataRecieved);
-	console.log("abc", userData[0]);
 	const {
 		user_firstname,
 		user_lastname,
@@ -171,7 +169,6 @@ function Dashboard({ page }) {
 	};
 
 	const componentSwitcher = (page) => {
-		console.log("inside switch", page);
 		switch (page) {
 			case "home":
 				return <CardHolder props={propData} />;

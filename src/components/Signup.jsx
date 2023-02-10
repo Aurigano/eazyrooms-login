@@ -177,7 +177,6 @@ export default function Signup() {
 		event.preventDefault();
 		handleValidation();
 		if (handleValidation()) {
-			console.log(values);
 			const { firstname, lastname, city, phone, email, password, zip } =
 				values;
 			const payloadBody = {
@@ -189,7 +188,6 @@ export default function Signup() {
 				user_city: city,
 				user_zipcode: zip,
 			};
-			console.log(payloadBody);
 			const userRegistrationEndPoint =
 				"https://snapkaro.com/eazyrooms_staging/api/user_registeration";
 

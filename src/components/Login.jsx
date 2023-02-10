@@ -247,13 +247,11 @@ export default function Login() {
 		event.preventDefault();
 		handleValidation();
 		if (handleValidation()) {
-			console.log(values);
 			const { email, password } = values;
 			const payloadBody = {
 				user_email: email,
 				user_password: password,
 			};
-			console.log(payloadBody);
 			const userLoginEndPoint =
 				"https://snapkaro.com/eazyrooms_staging/api/userlogin";
 
@@ -262,7 +260,6 @@ export default function Login() {
 					userLoginEndPoint,
 					payloadBody
 				);
-				console.log(data);
 
 				if (data.status) {
 					localStorage.setItem(
