@@ -202,10 +202,12 @@ export default function Signup() {
 				if (data.status) {
 					// if success, redirect to dashboard
 					navigate("/login");
+				} else {
+					setError(data.msg);
 				}
 			} catch (err) {
 				console.log(err);
-				setError(err.message);
+				setError(err.msg);
 			}
 		}
 	};
