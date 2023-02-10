@@ -137,26 +137,6 @@ const DashboardContainer = styled.div`
 function Dashboard({ page }) {
 	console.log("here1");
 	const navigate = useNavigate();
-	const userDataRecieved = localStorage.getItem("eazy-room-user");
-	const userData = JSON.parse(userDataRecieved);
-	const {
-		user_firstname,
-		user_lastname,
-		user_zipcode,
-		user_phone,
-		user_email,
-		user_id,
-	} = userData[0];
-
-	const propData = {
-		firstname: user_firstname,
-		lastname: user_lastname,
-		zipcode: user_zipcode,
-		phone: user_phone,
-		email: user_email,
-		id: user_id,
-	};
-
 	// if no user logged in
 	useEffect(() => {
 		console.log("here2");
@@ -166,94 +146,118 @@ function Dashboard({ page }) {
 		}
 	}, []);
 
-	const handleLogout = () => {
-		localStorage.removeItem("eazy-room-user");
-		navigate("/login");
-	};
+	let userData;
+	if (localStorage.getItem("eazy-room-user")) {
+		const userDataRecieved = localStorage.getItem("eazy-room-user");
+		userData = JSON.parse(userDataRecieved);
 
-	const componentSwitcher = (page) => {
-		switch (page) {
-			case "home":
-				return <CardHolder props={propData} />;
-			case "order":
-				return <Order />;
-			default:
-				return <Error />;
-		}
-	};
+		const {
+			user_firstname,
+			user_lastname,
+			user_zipcode,
+			user_phone,
+			user_email,
+			user_id,
+		} = userData[0];
 
-	return (
-		<DashboardContainer>
-			<div className="nav">
-				<div className="userbox">
-					<img className="profile" src={Logo} alt="logo" />
-					<div class="input-icons">
-						<img
-							src={Search}
-							alt="search"
-							class="fa fa-user icon-search"
-						></img>
-						<input
-							class="input-field"
-							type="text"
-							placeholder="Search"
-						/>
+		const propData = {
+			firstname: user_firstname,
+			lastname: user_lastname,
+			zipcode: user_zipcode,
+			phone: user_phone,
+			email: user_email,
+			id: user_id,
+		};
+
+		const handleLogout = () => {
+			localStorage.removeItem("eazy-room-user");
+			navigate("/login");
+		};
+
+		const componentSwitcher = (page) => {
+			switch (page) {
+				case "home":
+					return <CardHolder props={propData} />;
+				case "order":
+					return <Order />;
+				default:
+					return <Error />;
+			}
+		};
+
+		return (
+			<DashboardContainer>
+				<div className="nav">
+					<div className="userbox">
+						<img className="profile" src={Logo} alt="logo" />
+						<div class="input-icons">
+							<img
+								src={Search}
+								alt="search"
+								class="fa fa-user icon-search"
+							></img>
+							<input
+								class="input-field"
+								type="text"
+								placeholder="Search"
+							/>
+						</div>
+					</div>
+
+					<button className="logout" onClick={() => handleLogout()}>
+						Log Out
+					</button>
+				</div>
+				<div className="content">{componentSwitcher(page)}</div>
+
+				<div className="footer">
+					<div className="website-info">
+						<a
+							className="website-info"
+							href="https://www.easyrooms.com"
+						>
+							<img src={Web} alt="web" className="social-icons" />
+							<p className="footer-label">easyrooms.com</p>
+						</a>
+						<a
+							className="website-info"
+							href="https://www.easyrooms.com"
+						>
+							<img
+								src={Support}
+								alt="support"
+								className="social-icons"
+							/>
+							<p className="footer-label">Contact 1800-476-678</p>
+						</a>
+					</div>
+					<div className="socials">
+						<a href="https://www.facebook.com">
+							<img
+								src={Facebook}
+								alt="facebook"
+								className="social-icons fb-icon"
+							/>
+						</a>
+						<a href="https://www.twitter.com">
+							<img
+								src={Twitter}
+								alt="twitter"
+								className="social-icons"
+							/>
+						</a>
+						<a href="https://www.github.com">
+							<img
+								src={Github}
+								alt="github"
+								className="social-icons"
+							/>
+						</a>
 					</div>
 				</div>
-
-				<button className="logout" onClick={() => handleLogout()}>
-					Log Out
-				</button>
-			</div>
-			<div className="content">{componentSwitcher(page)}</div>
-
-			<div className="footer">
-				<div className="website-info">
-					<a
-						className="website-info"
-						href="https://www.easyrooms.com"
-					>
-						<img src={Web} alt="web" className="social-icons" />
-						<p className="footer-label">easyrooms.com</p>
-					</a>
-					<a
-						className="website-info"
-						href="https://www.easyrooms.com"
-					>
-						<img
-							src={Support}
-							alt="support"
-							className="social-icons"
-						/>
-						<p className="footer-label">Contact 1800-476-678</p>
-					</a>
-				</div>
-				<div className="socials">
-					<a href="https://www.facebook.com">
-						<img
-							src={Facebook}
-							alt="facebook"
-							className="social-icons fb-icon"
-						/>
-					</a>
-					<a href="https://www.twitter.com">
-						<img
-							src={Twitter}
-							alt="twitter"
-							className="social-icons"
-						/>
-					</a>
-					<a href="https://www.github.com">
-						<img
-							src={Github}
-							alt="github"
-							className="social-icons"
-						/>
-					</a>
-				</div>
-			</div>
-		</DashboardContainer>
-	);
+			</DashboardContainer>
+		);
+	}
 }
 
 export default Dashboard;

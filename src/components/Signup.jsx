@@ -20,6 +20,13 @@ const FormContainer = styled.div`
 	.form {
 		padding: 10px 0;
 	}
+	@media only screen and (max-height: 700px) {
+		.form {
+			max-height: 275px;
+			overflow-y: scroll;
+			margin: 15px 0;
+		}
+	}
 	h3 {
 		font-family: "Prompt";
 		font-size: 32px;
